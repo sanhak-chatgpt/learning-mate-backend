@@ -1,0 +1,19 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_learning_mate?createDatabaseIfNotExist=true
+    username: root
+    password: root
+
+  flyway:
+    enabled: false
