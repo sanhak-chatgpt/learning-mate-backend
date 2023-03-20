@@ -1,0 +1,14 @@
+name: learning_mate
+services:
+  mysql:
+    image: mysql:8.0.32
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: learning_mate
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

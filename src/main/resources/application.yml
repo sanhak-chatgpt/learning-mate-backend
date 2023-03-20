@@ -1,0 +1,9 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+
+spring:
+  profiles:
+    default: local
