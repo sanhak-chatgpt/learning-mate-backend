@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 import org.springframework.boot.runApplication
 
 @SpringBootApplication(
-	exclude = [
-		UserDetailsServiceAutoConfiguration::class,
-	]
+    exclude = [
+        UserDetailsServiceAutoConfiguration::class,
+    ]
 )
 class LearningMateApplication
 
 fun main(args: Array<String>) {
-	runApplication<LearningMateApplication>(*args)
+    runApplication<LearningMateApplication>(*args)
 }

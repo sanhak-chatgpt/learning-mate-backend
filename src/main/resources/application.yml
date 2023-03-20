@@ -7,3 +7,8 @@ server:
 spring:
   profiles:
     default: local
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
