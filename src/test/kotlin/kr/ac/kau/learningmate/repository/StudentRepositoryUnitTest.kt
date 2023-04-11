@@ -1,5 +1,7 @@
-package kr.ac.kau.learningmate.student
+package kr.ac.kau.learningmate.repository
 
+import kr.ac.kau.learningmate.domain.Student
+import kr.ac.kau.learningmate.repository.StudentRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
