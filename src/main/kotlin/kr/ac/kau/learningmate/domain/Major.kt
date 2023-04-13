@@ -7,45 +7,22 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-enum class status{
-    IN_PROGRESS, SUCCESS, FAILURE
-}
 @Entity
-class lecture (
+class Major (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @Column(nullable = false)
-    var user_id: Long,
-
-    @Column(nullable = false)
-    var topic_id: Long,
+    @Column(nullable = false, length = 255)
+    var major_name: String,
 
     @Column(nullable = false, length = 255)
-    var audio_url: String,
-
-    @Column(nullable = false)
-    var transcribed: String,
-
-    @Column(nullable = false)
-    var score: Integer,
-
-    @Column(nullable = false, length = 255)
-    var strength: String,
-
-    @Column(nullable = false)
-    var weakness: String,
-
-    @Column(nullable = false)
-    var status: status,
-
-    @Column(nullable = false, length = 255)
-    var helpfulness_rating: Integer,
+    var description: String,
 
     @Column(nullable = false)
     var createdAt: LocalDateTime,
 
     @Column(nullable = false)
     var updatedAt: LocalDateTime,
-)
+
+    )

@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-class topic (
+class Topic (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,

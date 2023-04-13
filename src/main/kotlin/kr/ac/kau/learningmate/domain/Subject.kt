@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-class subject (
+class Subject (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
