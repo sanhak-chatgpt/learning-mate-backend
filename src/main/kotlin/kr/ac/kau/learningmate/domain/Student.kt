@@ -1,4 +1,4 @@
-package kr.ac.kau.learningmate.student
+package kr.ac.kau.learningmate.domain
 
 import javax.persistence.Column
 import javax.persistence.Entity

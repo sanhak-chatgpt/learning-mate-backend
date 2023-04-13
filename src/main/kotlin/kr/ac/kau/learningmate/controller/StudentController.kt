@@ -1,5 +1,7 @@
-package kr.ac.kau.learningmate.student
+package kr.ac.kau.learningmate.controller
 
+import kr.ac.kau.learningmate.controller.dto.StudentResponseDto
+import kr.ac.kau.learningmate.service.StudentService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -9,11 +11,11 @@ class StudentController(
 ) {
 
     @GetMapping("/")
-    fun list(): List<StudentResponseDto> {
+    fun list(): List<StudentResponseDto.List> {
         return studentService
             .findAllStudents()
             .map {
-                StudentResponseDto(
+                StudentResponseDto.List(
                     name = it.name,
                     studentId = it.studentId,
                 )
