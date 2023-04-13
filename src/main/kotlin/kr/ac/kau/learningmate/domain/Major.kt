@@ -14,7 +14,7 @@ class Major (
     var id: Long,
 
     @Column(nullable = false, length = 255)
-    var major_name: String,
+    var majorName: String,
 
     @Column(nullable = false, length = 255)
     var description: String,

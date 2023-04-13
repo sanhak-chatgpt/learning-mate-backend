@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-enum class status{
+enum class Status{
     IN_PROGRESS, SUCCESS, FAILURE
 }
 @Entity
@@ -17,13 +17,13 @@ class Lecture (
     var id: Long,
 
     @Column(nullable = false)
-    var user_id: Long,
+    var userId: Long,
 
     @Column(nullable = false)
-    var topic_id: Long,
+    var topicId: String,
 
-    @Column(nullable = false, length = 255)
-    var audio_url: String,
+    @Column(nullable = false, columnDefinition = "TEXT")
+    var audioUrl: String,
 
     @Column(nullable = false)
     var transcribed: String,
@@ -31,17 +31,17 @@ class Lecture (
     @Column(nullable = false)
     var score: Integer,
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, columnDefinition = "TEXT")
     var strength: String,
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     var weakness: String,
 
     @Column(nullable = false)
-    var status: status,
+    var status: Status,
 
-    @Column(nullable = false, length = 255)
-    var helpfulness_rating: Integer,
+    @Column(nullable = false)
+    var helpfulnessRating: Integer,
 
     @Column(nullable = false)
     var createdAt: LocalDateTime,

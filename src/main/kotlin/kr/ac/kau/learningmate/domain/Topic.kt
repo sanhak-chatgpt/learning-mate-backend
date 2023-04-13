@@ -10,10 +10,10 @@ class Topic (
     var id: Long,
 
     @Column(nullable = false)
-    var subject_id: Long,
+    var subjectId: Long,
 
     @Column(nullable = false, length = 255)
-    var topic_name: String,
+    var topicName: String,
 
     @Column(nullable = false, length = 255)
     var description: String,
