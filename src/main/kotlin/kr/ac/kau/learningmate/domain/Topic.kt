@@ -10,8 +10,8 @@ class Topic (
     var id: Long,
 
     @ManyToOne
-    @JoinColumn(name = "SUBJECT_ID")
-    var subjectId: Subject,
+    @JoinColumn(name = "subject_id")
+    var subject: Subject,
 
     @Column(nullable = false, length = 255)
     var topicName: String,

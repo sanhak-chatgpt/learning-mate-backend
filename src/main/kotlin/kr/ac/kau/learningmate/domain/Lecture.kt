@@ -3,9 +3,7 @@ package kr.ac.kau.learningmate.domain
 import java.time.LocalDateTime
 import javax.persistence.*
 
-enum class Status{
-    IN_PROGRESS, SUCCESS, FAILURE
-}
+
 @Entity
 class Lecture (
     @Id
@@ -13,17 +11,17 @@ class Lecture (
     var id: Long,
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    var userId: User,
+    @JoinColumn(name = "user_id")
+    var user: User,
 
     @ManyToOne
-    @JoinColumn(name = "TOPIC_ID")
-    var topicId: Topic,
+    @JoinColumn(name = "topic_id")
+    var topic: Topic,
 
     @Column(nullable = false, columnDefinition = "TEXT")
     var audioUrl: String,
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     var transcribed: String,
 
     @Column(nullable = false)
@@ -35,6 +33,7 @@ class Lecture (
     @Column(nullable = false, columnDefinition = "TEXT")
     var weakness: String,
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var status: Status,
 
@@ -46,4 +45,10 @@ class Lecture (
 
     @Column(nullable = false)
     var updatedAt: LocalDateTime,
-)
+
+
+) {
+    enum class Status{
+        IN_PROGRESS, SUCCESS, FAILURE
+    }
+}

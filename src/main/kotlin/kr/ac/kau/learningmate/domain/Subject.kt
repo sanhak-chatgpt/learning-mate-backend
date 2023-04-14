@@ -10,8 +10,8 @@ class Subject (
     var id: Long,
 
     @ManyToOne
-    @JoinColumn(name = "MAJOR_ID")
-    var majorId: Major,
+    @JoinColumn(name = "major_id")
+    var major: Major,
 
     @Column(nullable = false, length = 255)
     var subjectName: String,
