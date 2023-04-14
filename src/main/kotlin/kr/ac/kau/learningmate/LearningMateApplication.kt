@@ -8,7 +8,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication(
     exclude = [
         UserDetailsServiceAutoConfiguration::class,
-        ErrorMvcAutoConfiguration::class
+        ErrorMvcAutoConfiguration::class,
     ]
 )
 class LearningMateApplication
