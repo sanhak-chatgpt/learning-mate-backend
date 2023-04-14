@@ -1,4 +1,4 @@
-package kr.ac.kau.learningmate.configuration
+package kr.ac.kau.learningmate.config
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
