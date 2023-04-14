@@ -9,8 +9,9 @@ class Subject (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @Column(nullable = false)
-    var majorId: Long,
+    @ManyToOne
+    @JoinColumn(name = "major_id")
+    var major: Major,
 
     @Column(nullable = false, length = 255)
     var subjectName: String,
