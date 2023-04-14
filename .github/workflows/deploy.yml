@@ -44,5 +44,9 @@ jobs:
             docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
             if [ "$(docker ps -aq)" ]; then
               docker rm -f $(docker ps -aq)
+            fi
+            if [ "$(docker images -q ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1)" ]; then
+              docker rmi ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
+            fi
             docker pull ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
             docker run -d -p 8080:8080 ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
