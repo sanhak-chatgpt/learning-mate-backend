@@ -1,11 +1,7 @@
 package kr.ac.kau.learningmate.domain
 
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 enum class Status{
     IN_PROGRESS, SUCCESS, FAILURE
@@ -16,11 +12,13 @@ class Lecture (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @Column(nullable = false)
-    var userId: Long,
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    var userId: User,
 
-    @Column(nullable = false)
-    var topicId: String,
+    @ManyToOne
+    @JoinColumn(name = "TOPIC_ID")
+    var topicId: Topic,
 
     @Column(nullable = false, columnDefinition = "TEXT")
     var audioUrl: String,

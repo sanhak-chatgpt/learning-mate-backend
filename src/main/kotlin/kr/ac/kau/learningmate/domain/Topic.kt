@@ -9,8 +9,9 @@ class Topic (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @Column(nullable = false)
-    var subjectId: Long,
+    @ManyToOne
+    @JoinColumn(name = "SUBJECT_ID")
+    var subjectId: Subject,
 
     @Column(nullable = false, length = 255)
     var topicName: String,
