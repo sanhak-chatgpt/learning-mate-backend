@@ -21,41 +21,45 @@ create table subject
 (
     id           bigint auto_increment
         primary key,
+    major_id     bigint                     not null,
     subject_name varchar(255)               not null,
     description  varchar(255)               not null,
     created_at   datetime(6) default now(6) not null,
     updated_at   datetime(6) default now(6) not null,
     constraint major_id
-        foreign key (id) references major (id)
+        foreign key (major_id) references major (id)
 );
 
 create table topic
 (
     id          bigint auto_increment
         primary key,
+    subject_id  bigint                     not null,
     topic_name  varchar(255)               not null,
     description varchar(255)               not null,
     created_at  datetime(6) default now(6) not null,
     updated_at  datetime(6) default now(6) not null,
     constraint subject_id
-        foreign key (id) references subject (id)
+        foreign key (subject_id) references subject (id)
 );
 
 create table lecture
 (
-    id                bigint auto_increment
+    id                 bigint auto_increment
         primary key,
-    audio_url         varchar(255)                               not null,
-    transcribed       text                                       null,
-    score             integer                                    null,
-    strength          text                                       null,
-    weakness          text                                       null,
-    status            enum ('IN_PROGRESS', 'SUCCESS', 'FAILURE') not null,
-    helpfulnessRating integer                                    null,
-    created_at        datetime(6) default now(6)                 not null,
-    updated_at        datetime(6) default now(6)                 not null,
+    topic_id           bigint                                     not null,
+    user_id            bigint                                     not null,
+    audio_url          varchar(255)                               not null,
+    transcribed        TEXT                                       null,
+    score              INTEGER                                    null,
+    strength           TEXT                                       null,
+    weakness           TEXT                                       null,
+    status             varchar (255)                              not null,
+    helpfulness_rating INTEGER                                    null,
+    created_at         DATETIME(6) default now(6)                 not null,
+    updated_at         DATETIME(6) default now(6)                 not null,
     constraint topic_id
-        foreign key (id) references topic (id),
+        foreign key (topic_id) references topic (id),
     constraint user_id
-        foreign key (id) references user (id)
+        foreign key (user_id) references user (id)
 );

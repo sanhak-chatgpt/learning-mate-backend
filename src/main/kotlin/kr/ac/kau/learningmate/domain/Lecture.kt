@@ -1,31 +1,27 @@
 package kr.ac.kau.learningmate.domain
 
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
-enum class Status{
-    IN_PROGRESS, SUCCESS, FAILURE
-}
+
 @Entity
 class Lecture (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @Column(nullable = false)
-    var userId: Long,
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    var user: User,
 
-    @Column(nullable = false)
-    var topicId: String,
+    @ManyToOne
+    @JoinColumn(name = "topic_id")
+    var topic: Topic,
 
     @Column(nullable = false, columnDefinition = "TEXT")
     var audioUrl: String,
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     var transcribed: String,
 
     @Column(nullable = false)
@@ -37,6 +33,7 @@ class Lecture (
     @Column(nullable = false, columnDefinition = "TEXT")
     var weakness: String,
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var status: Status,
 
@@ -48,4 +45,10 @@ class Lecture (
 
     @Column(nullable = false)
     var updatedAt: LocalDateTime,
-)
+
+
+) {
+    enum class Status{
+        IN_PROGRESS, SUCCESS, FAILURE
+    }
+}
