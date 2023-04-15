@@ -18,5 +18,4 @@ class User (
     @Column(nullable = false)
     var updatedAt: LocalDateTime,
 
-
     )
