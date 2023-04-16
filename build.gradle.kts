@@ -40,6 +40,8 @@ dependencies {
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("io.mockk:mockk:1.13.4")
+	implementation ("io.springfox:springfox-swagger-ui:3.0.0")
+	implementation ("io.springfox:springfox-swagger2:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {
