@@ -1,5 +1,6 @@
 package kr.ac.kau.learningmate.domain
 
+import AbstractAuditEntity
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -40,14 +41,7 @@ class Lecture (
     @Column(nullable = false)
     var helpfulnessRating: Integer,
 
-    @Column(nullable = false)
-    var createdAt: LocalDateTime,
-
-    @Column(nullable = false)
-    var updatedAt: LocalDateTime,
-
-
-) {
+) :AbstractAuditEntity() {
     enum class Status{
         IN_PROGRESS, SUCCESS, FAILURE
     }

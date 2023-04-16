@@ -1,5 +1,6 @@
 package kr.ac.kau.learningmate.domain
 
+import AbstractAuditEntity
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -19,10 +20,5 @@ class Major (
     @Column(nullable = false, length = 255)
     var description: String,
 
-    @Column(nullable = false)
-    var createdAt: LocalDateTime,
 
-    @Column(nullable = false)
-    var updatedAt: LocalDateTime,
-
-    )
+    ):AbstractAuditEntity()
