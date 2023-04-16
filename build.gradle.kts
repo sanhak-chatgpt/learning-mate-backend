@@ -19,6 +19,7 @@ repositories {
 // FetchType.LAZY 적용 시 프록시 객체를 만들기 위해 필요한 설정 - https://techblog.woowahan.com/2675/
 allOpen {
 	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
 }
 
 dependencies {
