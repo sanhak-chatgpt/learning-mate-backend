@@ -1,0 +1,19 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+
+spring:
+  profiles:
+    default: local
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  web:
+    resources:
+      add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
