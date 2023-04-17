@@ -5,12 +5,19 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-class User (
+class Subject (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
 
-    @Column(nullable = false, length = 255)
-    var name: String,
+    @ManyToOne
+    @JoinColumn(name = "major_id")
+    var major: Major,
 
-    ):AbstractAuditEntity()
+    @Column(nullable = false, length = 255)
+    var subjectName: String,
+
+    @Column(nullable = false, length = 255)
+    var description: String,
+
+) :AbstractAuditEntity()
