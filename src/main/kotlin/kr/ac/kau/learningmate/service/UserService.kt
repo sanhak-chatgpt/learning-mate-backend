@@ -12,10 +12,6 @@ class UserService(
 ) {
 
     fun findById(id: Long): User {
-        return User(
-            id = 1,
-            name = "구영민",
-        )
-        return userRepository.findByIdOrNull(id)!!
+        return userRepository.findByIdOrNull(id) ?: throw IllegalArgumentException("없는 사용자 입니다.")
     }
 }

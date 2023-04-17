@@ -1,0 +1,1 @@
+insert into user (name) values ('구영민');
