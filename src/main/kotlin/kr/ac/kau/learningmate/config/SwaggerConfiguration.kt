@@ -11,26 +11,23 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @Configuration
-@EnableSwagger2
 class SwaggerConfiguration {
 
     @Bean
-    fun docket(): Docket {
+    fun api(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
-                .useDefaultResponseMessages(false)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("kr.ac.kau.learningmate.controller"))
-                .paths(PathSelectors.any())
-                .build()
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("kr.ac.kau.learningmate"))
+            .paths(PathSelectors.any())
+            .build()
+            .apiInfo(apiInfo())
     }
 
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
-                .title("Web Application Api")
-                .description("설명 부분")
-                .version("1.0.0")
-                .build()
+            .title("Web Application Api")
+            .description("설명 부분")
+            .version("1.0.0")
+            .build()
     }
-
 }
