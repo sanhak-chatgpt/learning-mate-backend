@@ -5,11 +5,11 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import kr.ac.kau.learningmate.domain.Student
+import kr.ac.kau.learningmate.repository.StudentRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import kr.ac.kau.learningmate.repository.StudentRepository
 
 @ExtendWith(MockKExtension::class)
 class StudentServiceUnitTest {

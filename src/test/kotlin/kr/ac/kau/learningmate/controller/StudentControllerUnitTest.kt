@@ -4,7 +4,6 @@ import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import kr.ac.kau.learningmate.controller.StudentController
 import kr.ac.kau.learningmate.domain.Student
 import kr.ac.kau.learningmate.service.StudentService
 import org.junit.jupiter.api.BeforeEach

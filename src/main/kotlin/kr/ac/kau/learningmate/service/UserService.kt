@@ -4,7 +4,6 @@ import kr.ac.kau.learningmate.domain.User
 import kr.ac.kau.learningmate.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 @Service
 class UserService(
