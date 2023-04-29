@@ -4,6 +4,8 @@ import kr.ac.kau.learningmate.controller.dto.LectureDto
 import kr.ac.kau.learningmate.service.LectureService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -17,5 +19,13 @@ class LectureController(private val lectureService: LectureService) {
     ): LectureDto.Response {
         val userId = 1L
         return lectureService.getLecture(id, userId)
+    }
+    @PostMapping("/{id}/rate-helpfulness")
+    fun rateHelpfulness(
+        @PathVariable id: Long,
+        @RequestBody helpfulness: LectureDto.RateHelpfulness
+        // @RequestParam(defaultValue = "5") rating :Int
+    ) {
+        lectureService.rateHelpfulness(id, userId = 1L, helpfulness)
     }
 }

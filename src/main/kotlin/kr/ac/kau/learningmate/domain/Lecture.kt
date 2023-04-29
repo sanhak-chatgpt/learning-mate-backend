@@ -32,7 +32,7 @@ class Lecture(
     var transcribed: String,
 
     @Column(nullable = false)
-    var score: Integer,
+    var score: Int,
 
     @Column(nullable = false, columnDefinition = "TEXT")
     var strength: String,
@@ -45,7 +45,7 @@ class Lecture(
     var status: Status,
 
     @Column(nullable = false)
-    var helpfulnessRating: Integer,
+    var helpfulnessRating: Int,
 
 ) : AbstractAuditEntity() {
     enum class Status {
