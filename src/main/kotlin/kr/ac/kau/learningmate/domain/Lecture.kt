@@ -1,12 +1,18 @@
 package kr.ac.kau.learningmate.domain
 
 import AbstractAuditEntity
-import java.time.LocalDateTime
-import javax.persistence.*
-
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 
 @Entity
-class Lecture (
+class Lecture(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
@@ -41,8 +47,8 @@ class Lecture (
     @Column(nullable = false)
     var helpfulnessRating: Integer,
 
-) :AbstractAuditEntity() {
-    enum class Status{
+) : AbstractAuditEntity() {
+    enum class Status {
         IN_PROGRESS, SUCCESS, FAILURE
     }
 }
