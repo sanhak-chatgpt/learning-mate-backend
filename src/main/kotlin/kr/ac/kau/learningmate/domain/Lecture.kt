@@ -28,24 +28,24 @@ class Lecture(
     @Column(nullable = false, columnDefinition = "TEXT")
     var audioUrl: String,
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    var transcribed: String,
+    @Column(nullable = true, columnDefinition = "TEXT")
+    var transcribed: String?,
 
-    @Column(nullable = false)
-    var score: Integer,
+    @Column(nullable = true)
+    var score: Int?,
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    var strength: String,
+    @Column(nullable = true, columnDefinition = "TEXT")
+    var strength: String?,
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    var weakness: String,
+    @Column(nullable = true, columnDefinition = "TEXT")
+    var weakness: String?,
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var status: Status,
 
-    @Column(nullable = false)
-    var helpfulnessRating: Integer,
+    @Column(nullable = true)
+    var helpfulnessRating: Int?,
 
 ) : AbstractAuditEntity() {
     enum class Status {

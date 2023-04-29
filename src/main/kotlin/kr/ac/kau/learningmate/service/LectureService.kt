@@ -1,13 +1,21 @@
 package kr.ac.kau.learningmate.service
 
 import kr.ac.kau.learningmate.controller.dto.LectureDto
+import kr.ac.kau.learningmate.domain.Lecture
 import kr.ac.kau.learningmate.repository.LectureRepository
+import kr.ac.kau.learningmate.repository.TopicRepository
+import kr.ac.kau.learningmate.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import javax.persistence.EntityNotFoundException
+import javax.transaction.Transactional
 
 @Service
-class LectureService(private val lectureRepository: LectureRepository) {
+class LectureService(
+    private val lectureRepository: LectureRepository,
+    private val topicRepository: TopicRepository,
+    private val userRepository: UserRepository,
+) {
 
     fun getLecture(id: Long, userId: Long): LectureDto.Response {
 
@@ -29,5 +37,29 @@ class LectureService(private val lectureRepository: LectureRepository) {
             status = lecture.status,
             helpfulnessRating = lecture.helpfulnessRating
         )
+    }
+
+    @Transactional
+    fun createLecture(request: LectureDto.Request): Lecture {
+        val topic = topicRepository.findByIdOrNull(request.topicId)
+            ?: throw EntityNotFoundException("Topic not found with id ${request.topicId}")
+
+        val user = userRepository.findByIdOrNull(id = 1L)
+            ?: throw EntityNotFoundException("User not found with id 1")
+
+        val lecture = Lecture(
+            id = 0L,
+            user = user,
+            topic = topic,
+            audioUrl = request.audioUrl,
+            transcribed = null,
+            score = null,
+            strength = null,
+            weakness = null,
+            status = Lecture.Status.IN_PROGRESS,
+            helpfulnessRating = null,
+        )
+
+        return lectureRepository.save(lecture)
     }
 }

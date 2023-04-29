@@ -11,5 +11,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
         http
             .authorizeRequests()
             .antMatchers("/").permitAll()
+            .and()
+            .csrf().disable() // CSRF 비활성화
     }
 }
