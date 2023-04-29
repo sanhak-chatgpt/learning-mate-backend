@@ -3,3 +3,12 @@ spring:
     url: jdbc:mysql://localhost:3306/learning_mate
     username: root
     password: root
+
+  jpa:
+    properties:
+      hibernate.show-sql: true
+      hibernate.format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
