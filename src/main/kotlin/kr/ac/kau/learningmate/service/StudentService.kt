@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service
 class StudentService(
     private val studentRepository: StudentRepository,
 ) {
-
     fun findAllStudents(): List<Student> {
         return studentRepository.findAll()
     }
