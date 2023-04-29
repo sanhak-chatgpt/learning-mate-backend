@@ -1,6 +1,6 @@
 package kr.ac.kau.learningmate.controller.dto
 
-sealed class UserResponseDto {
+sealed class UserDto {
 
     data class Me(
         val name: String,
