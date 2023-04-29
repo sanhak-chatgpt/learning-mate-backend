@@ -38,6 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.zalando:problem-spring-web-starter:0.27.0")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.15")
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
