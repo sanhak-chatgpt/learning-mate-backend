@@ -1,10 +1,10 @@
-name: Spring Boot & Gradle & Docker & EC2 CI/CD
+name: Deploy
 
 on:
   push:
     branches:
       - main
-
+  workflow_dispatch:
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.AWS_TEST_X_HOST }}
           username: ${{ secrets.AWS_TEST_X_USERNAME }}
           key: ${{ secrets.AWS_TEST_X_KEY }}
-          envs: GITHUB_SHA  
+          envs: GITHUB_SHA
           script: |
             docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
             if [ "$(docker ps -aq)" ]; then
