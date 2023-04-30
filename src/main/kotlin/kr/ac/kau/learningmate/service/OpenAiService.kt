@@ -1,5 +1,6 @@
 package kr.ac.kau.learningmate.service
 
+import kr.ac.kau.learningmate.controller.dto.OpenAiDto
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -12,18 +13,11 @@ class OpenAiService(
         .baseUrl("https://www.httpbin.org")
         .build()
 
-    data class Response(
-        val args: Map<String, String>,
-        val headers: Map<String, String>,
-        val origin: String,
-        val url: String,
-    )
-
-    fun getHttpbin(): Response {
+    fun getHttpbin(): OpenAiDto.Response {
         val response = webClient.get()
             .uri("get")
             .retrieve()
-            .bodyToMono(Response::class.java)
+            .bodyToMono(OpenAiDto.Response::class.java)
             .block()!!
 
         return response
