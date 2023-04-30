@@ -23,6 +23,7 @@ sealed class LectureDto {
         val topicId: Long,
         val audioUrl: String,
     )
+
     data class RateHelpfulness(
         val helpfulnessRating: Int
     )
