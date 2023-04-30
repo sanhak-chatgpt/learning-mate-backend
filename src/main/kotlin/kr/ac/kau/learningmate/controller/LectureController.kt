@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/lecture")
 class LectureController(private val lectureService: LectureService) {
 
+    @PostMapping("/")
+    fun createLecture(@RequestBody request: LectureDto.Request): LectureDto.Response {
+        val userId = 1L
+        val lecture = lectureService.createLecture(request, userId)
+        return lectureService.getLecture(lecture.id, userId)
+    }
+
     @GetMapping("/{id}")
     fun getLecture(
         @PathVariable id: Long,
