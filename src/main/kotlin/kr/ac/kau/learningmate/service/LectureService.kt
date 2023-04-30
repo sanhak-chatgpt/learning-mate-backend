@@ -30,6 +30,7 @@ class LectureService(private val lectureRepository: LectureRepository) {
             helpfulnessRating = lecture.helpfulnessRating
         )
     }
+
     fun rateHelpfulness(id: Long, userId: Long, helpfulness: LectureDto.RateHelpfulness) {
         val lecture = lectureRepository.findByIdOrNull(id = id)
             ?: throw EntityNotFoundException("Lecture not found with id : $id")
