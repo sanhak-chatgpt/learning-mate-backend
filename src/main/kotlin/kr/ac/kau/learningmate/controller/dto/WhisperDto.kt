@@ -8,6 +8,6 @@ sealed class WhisperDto {
     )
 
     data class Response(
-        val data: String,
+        val text: String,
     )
 }
