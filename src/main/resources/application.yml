@@ -17,3 +17,6 @@ spring:
       add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
+
+learning-mate:
+  openai-api-key: example-key

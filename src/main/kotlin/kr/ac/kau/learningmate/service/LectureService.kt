@@ -1,5 +1,6 @@
 package kr.ac.kau.learningmate.service
 
+import kr.ac.kau.learningmate.config.GptClient
 import kr.ac.kau.learningmate.controller.dto.LectureDto
 import kr.ac.kau.learningmate.domain.Lecture
 import kr.ac.kau.learningmate.repository.LectureRepository
@@ -16,6 +17,8 @@ class LectureService(
     private val lectureRepository: LectureRepository,
     private val topicRepository: TopicRepository,
     private val userRepository: UserRepository,
+    private val gptClient: GptClient,
+    // private val s3Client: AmazonS3
 ) {
 
     fun getLecture(id: Long, userId: Long): LectureDto.Response {
