@@ -12,15 +12,19 @@ sealed class LectureDto {
         val topicId: Long,
         val topicName: String,
         val transcribed: String,
-        val score: Integer,
+        val score: Int,
         val strength: String?,
         val weakness: String?,
         val status: Lecture.Status,
-        val helpfulnessRating: Integer
+        val helpfulnessRating: Int
     )
 
     data class Request(
         val topicId: Long,
         val audioUrl: String,
+    )
+
+    data class RateHelpfulness(
+        val helpfulnessRating: Int
     )
 }
