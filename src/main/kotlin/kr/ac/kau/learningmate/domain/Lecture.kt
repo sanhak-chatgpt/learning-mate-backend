@@ -47,6 +47,7 @@ class Lecture(
     @Column(nullable = true)
     var helpfulnessRating: Int?,
 
+
 ) : AbstractAuditEntity() {
     enum class Status {
         IN_PROGRESS, SUCCESS, FAILURE

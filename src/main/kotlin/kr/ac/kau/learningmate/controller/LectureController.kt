@@ -27,4 +27,12 @@ class LectureController(private val lectureService: LectureService) {
         val userId = 1L
         return lectureService.getLecture(id, userId)
     }
+
+    @PostMapping("/{id}/rate-helpfulness")
+    fun rateHelpfulness(
+        @PathVariable id: Long,
+        @RequestBody helpfulness: LectureDto.RateHelpfulness
+    ) {
+        lectureService.rateHelpfulness(id, userId = 1L, helpfulness)
+    }
 }

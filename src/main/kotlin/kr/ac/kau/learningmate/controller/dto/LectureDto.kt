@@ -17,10 +17,15 @@ sealed class LectureDto {
         val weakness: String?,
         val status: Lecture.Status,
         val helpfulnessRating: Int?
+
     )
 
     data class Request(
         val topicId: Long,
         val audioUrl: String,
+    )
+
+    data class RateHelpfulness(
+        val helpfulnessRating: Int
     )
 }

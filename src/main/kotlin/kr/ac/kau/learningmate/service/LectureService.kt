@@ -39,6 +39,7 @@ class LectureService(
         )
     }
 
+
     @Transactional
     fun createLecture(request: LectureDto.Request, userId: Long): Lecture {
         val topic = topicRepository.findByIdOrNull(request.topicId)
@@ -60,5 +61,13 @@ class LectureService(
             helpfulnessRating = null,
         )
         return lectureRepository.save(lecture)
+
+    fun rateHelpfulness(id: Long, userId: Long, helpfulness: LectureDto.RateHelpfulness) {
+        val lecture = lectureRepository.findByIdOrNull(id = id)
+            ?: throw EntityNotFoundException("Lecture not found with id : $id")
+
+        lecture.helpfulnessRating = helpfulness.helpfulnessRating
+
+        lectureRepository.save(lecture)
     }
 }
