@@ -17,7 +17,11 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
             .disable()
             .cors().configurationSource {
                 val cors = CorsConfiguration()
-                cors.allowedOrigins = listOf("https://www.thelearningmate.com", "http://localhost:3000")
+                cors.allowedOrigins = listOf(
+                    "https://www.thelearningmate.com",
+                    "https://api.thelearningmate.com",
+                    "http://localhost:3000",
+                )
                 cors.allowedMethods = listOf("*")
                 cors.allowedHeaders = listOf("*")
                 cors
