@@ -17,3 +17,6 @@ spring:
 
   flyway:
     enabled: false
+
+learning-mate:
+  openai-api-key: example-key
