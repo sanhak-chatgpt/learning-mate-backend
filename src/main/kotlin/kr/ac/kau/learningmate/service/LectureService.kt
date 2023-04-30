@@ -6,6 +6,7 @@ import kr.ac.kau.learningmate.repository.LectureRepository
 import kr.ac.kau.learningmate.repository.TopicRepository
 import kr.ac.kau.learningmate.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import javax.persistence.EntityNotFoundException
 import javax.transaction.Transactional
@@ -60,6 +61,14 @@ class LectureService(
             helpfulnessRating = null,
         )
         return lectureRepository.save(lecture)
+    }
+
+    @Async
+    fun updateLectureAsync(lecture: Lecture) {
+        // TODO: S3 파일을 내려받기
+        // TODO: Whisper로 API 호출하기
+        // TODO: GPT API 호출하기
+        // TODO: Lecture 저장하기
     }
 
     fun rateHelpfulness(id: Long, userId: Long, helpfulness: LectureDto.RateHelpfulness) {
