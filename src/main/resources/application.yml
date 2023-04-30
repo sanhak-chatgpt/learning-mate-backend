@@ -3,6 +3,7 @@ server:
     whitelabel:
       enabled: false
   shutdown: graceful
+  forward-headers-strategy: framework
 
 spring:
   profiles:
