@@ -45,7 +45,7 @@ class LectureService(
             ?: throw EntityNotFoundException("Topic not found with id ${request.topicId}")
 
         val user = userRepository.findByIdOrNull(userId)
-            ?: throw EntityNotFoundException("User not found with id 1")
+            ?: throw EntityNotFoundException("User not found with id $userId")
 
         val lecture = Lecture(
             id = 0L,
