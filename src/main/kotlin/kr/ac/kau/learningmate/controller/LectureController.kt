@@ -25,7 +25,6 @@ class LectureController(private val lectureService: LectureService) {
     fun rateHelpfulness(
         @PathVariable id: Long,
         @RequestBody helpfulness: LectureDto.RateHelpfulness
-        // @RequestParam(defaultValue = "5") rating :Int
     ) {
         lectureService.rateHelpfulness(id, userId = 1L, helpfulness)
     }
