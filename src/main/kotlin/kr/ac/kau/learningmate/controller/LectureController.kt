@@ -17,6 +17,7 @@ class LectureController(private val lectureService: LectureService) {
     fun createLecture(@RequestBody request: LectureDto.Request): LectureDto.Response {
         val userId = 1L
         val lecture = lectureService.createLecture(request, userId)
+        lectureService.updateLectureAsync(lecture)
         return lectureService.getLecture(lecture.id, userId)
     }
 
