@@ -17,7 +17,6 @@ sealed class LectureDto {
         val weakness: String?,
         val status: Lecture.Status,
         val helpfulnessRating: Int?
-
     )
 
     data class Request(
