@@ -47,8 +47,6 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("io.mockk:mockk:1.13.4")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
-    implementation("org.json:json:20200518")
 }
 
 tasks.withType<KotlinCompile> {
