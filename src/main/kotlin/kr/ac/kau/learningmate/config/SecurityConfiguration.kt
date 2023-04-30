@@ -22,12 +22,5 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 cors.allowedHeaders = listOf("*")
                 cors
             }
-            .and()
-            .authorizeRequests()
-            .anyRequest().permitAll()
-            .and()
-            .formLogin()
-            .and()
-            .httpBasic()
     }
 }
