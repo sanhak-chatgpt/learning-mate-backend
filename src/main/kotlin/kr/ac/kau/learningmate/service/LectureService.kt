@@ -12,6 +12,7 @@ import kr.ac.kau.learningmate.repository.LectureRepository
 import kr.ac.kau.learningmate.repository.TopicRepository
 import kr.ac.kau.learningmate.repository.UserRepository
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
@@ -28,6 +29,8 @@ class LectureService(
     private val gptService: GptService,
     private val s3Client: AmazonS3,
     private val objectMapper: ObjectMapper,
+    @Value("\${learning-mate.bucket-name}")
+    private val bucketName: String,
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -86,16 +89,17 @@ class LectureService(
         try {
             // S3 버킷에 저장된 녹음 파일 키
             val audioUrl = lecture.audioUrl
+            val key = URI(audioUrl).path.substring(1)
 
             // S3에서 녹음 파일 내려받기
-            val s3Object = s3Client.getObject(
-                GetObjectRequest("learning-mate-content-prod", URI(audioUrl).path.substring(1))
-            )
+            log.info("Getting object - $bucketName / $key")
+            val s3Object = s3Client.getObject(GetObjectRequest(bucketName, key))
             val audioBytes = s3Object.objectContent.readAllBytes()
 
             // Whisper API 호출하여 TTS script 생성하기
             val model = "whisper-1" // Whisper 모델명
             val request = WhisperDto.Request(model, audioBytes)
+            log.info("Requesting to transcribe - $request")
             val script = whisperService.transcribeAudio(request)
 
             val prompt = """
@@ -106,22 +110,22 @@ class LectureService(
             """.trimIndent()
 
             // GPT API 호출하여 script를 기반으로 Lecture 생성하기
+            log.info("Requesting to complete chat - $prompt")
             val generatedText = gptService.completeChat(prompt)
-            if (generatedText.isNotEmpty()) {
-                // parsing 성공하는 것까지
-
-                val parsed = objectMapper.readValue<GptDto.LectureResponseDto>(generatedText)
-                lecture.score = parsed.score
-                lecture.strength = parsed.strength
-                lecture.weakness = parsed.weakness
-
-                lecture.status = Lecture.Status.SUCCESS
-            }
+            log.info("GPT Response - $generatedText")
+            val parsed = objectMapper.readValue<GptDto.LectureResponseDto>(generatedText)
+            log.info("Parsed - $parsed")
+            lecture.score = parsed.score
+            lecture.strength = parsed.strength
+            lecture.weakness = parsed.weakness
             lecture.transcribed = generatedText
+            lecture.status = Lecture.Status.SUCCESS
+            log.info("Updating lecture succeeded - ${lecture.score} / ${lecture.strength} / ${lecture.weakness}")
         } catch (e: Exception) {
             log.error("Error during updating lecture", e)
             lecture.status = Lecture.Status.FAILURE
         } finally {
+            log.info("Saving lecture - ${lecture.id}")
             lectureRepository.save(lecture)
         }
     }
