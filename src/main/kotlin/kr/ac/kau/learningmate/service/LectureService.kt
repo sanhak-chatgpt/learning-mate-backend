@@ -81,6 +81,8 @@ class LectureService(
     @Async
     fun updateLectureAsync(lecture: Lecture) {
 
+        log.info("Called updateLectureAsync - id = ${lecture.id}")
+
         try {
             // S3 버킷에 저장된 녹음 파일 키
             val audioUrl = lecture.audioUrl
