@@ -46,4 +46,10 @@ class GptDto {
             )
         }
     }
+
+    data class LectureResponseDto(
+        val score: Int,
+        val strength: String,
+        val weakness: String,
+    )
 }
