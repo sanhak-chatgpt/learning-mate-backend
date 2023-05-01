@@ -118,7 +118,7 @@ class LectureService(
             lecture.score = parsed.score
             lecture.strength = parsed.strength
             lecture.weakness = parsed.weakness
-            lecture.transcribed = generatedText
+            lecture.transcribed = script
             lecture.status = Lecture.Status.SUCCESS
             log.info("Updating lecture succeeded - ${lecture.score} / ${lecture.strength} / ${lecture.weakness}")
         } catch (e: Exception) {
