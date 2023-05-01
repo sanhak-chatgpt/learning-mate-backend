@@ -22,10 +22,13 @@ internal class LectureUpdateServiceTest {
 
     @MockK
     lateinit var gptService: GptService
+
     @MockK
     lateinit var whisperService: WhisperService
+
     @InjectMockKs
     lateinit var lectureService: LectureService
+
     @Test
     fun lectureUpdateServiceTest() {
         // Given
