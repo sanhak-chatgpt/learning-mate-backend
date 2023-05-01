@@ -7,6 +7,7 @@ class GptDto {
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
     data class Request(
         val model: String,
+        val temperature: Double,
         val messages: List<Message>
     ) {
         @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
