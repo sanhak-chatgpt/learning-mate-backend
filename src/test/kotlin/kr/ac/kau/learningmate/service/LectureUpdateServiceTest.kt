@@ -16,16 +16,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
-@TestPropertySource(properties = ["learning-mate.openai-api-key=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"])
+@TestPropertySource(properties = ["learning-mate.openai-api-key=example-key"])
 @Disabled("This test requires a valid OpenAI API key. Please change the below property to a valid key.")
 internal class LectureUpdateServiceTest {
 
     @MockK
     lateinit var gptService: GptService
+
     @MockK
     lateinit var whisperService: WhisperService
+
     @InjectMockKs
     lateinit var lectureService: LectureService
+
     @Test
     fun lectureUpdateServiceTest() {
         // Given

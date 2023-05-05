@@ -96,26 +96,29 @@ class LectureService(
             val request = WhisperDto.Request(model, audioBytes)
             val script = whisperService.transcribeAudio(request)
 
-            val prompt = """
-            아래의 강의를 0~100사이의 점수에 대해 측정하고, 이 강의의 내용에서만 좋았던 점과 개선할 점을 여러개 분석해줘. 아래의 형식으로 데이터를 JSON 으로 만들어줘. 설명하지마. 마크다운으로 주지 마. 오로지 JSON 형태로만 줘. 
-            {"score":"/* 0~100사이의 강의에 대한 점수에 대해 매우 야박하고 까다롭게 측정 */","strength":"/* 200자 내외의 좋았던 점 설명 */","weakness":"/* 200자 내외의고쳐야 할 점 설명*/"}
-            
-            $script
-            """.trimIndent()
+            if (script.isNotEmpty()) {
+                val prompt = """
+                    아래의 강의를 0~100사이의 점수에 대해 측정하고, 이 강의의 내용에서만 좋았던 점과 개선할 점을 여러개 분석해줘. 아래의 형식으로 데이터를 JSON 으로 만들어줘. 설명하지마. 마크다운으로 주지 마. 오로지 JSON 형태로만 줘. 
+                    {"score":"/* 0~100사이의 강의에 대한 점수에 대해 매우 야박하고 까다롭게 측정 */","strength":"/* 200자 내외의 좋았던 점 설명 */","weakness":"/* 200자 내외의고쳐야 할 점 설명*/"}
+                    
+                    $script
+                """.trimIndent()
 
-            // GPT API 호출하여 script를 기반으로 Lecture 생성하기
-            val generatedText = gptService.completeChat(prompt)
-            if (generatedText.isNotEmpty()) {
-                // parsing 성공하는 것까지
+                // GPT API 호출하여 script를 기반으로 Lecture 생성하기
+                val generatedText = gptService.completeChat(prompt)
+                if (generatedText.isNotEmpty()) {
+                    // parsing 성공하는 것까지
 
-                val parsed = objectMapper.readValue<GptDto.LectureResponseDto>(generatedText)
-                lecture.score = parsed.score
-                lecture.strength = parsed.strength
-                lecture.weakness = parsed.weakness
-
-                lecture.status = Lecture.Status.SUCCESS
+                    val parsed = objectMapper.readValue<GptDto.LectureResponseDto>(generatedText)
+                    lecture.score = parsed.score
+                    lecture.strength = parsed.strength
+                    lecture.weakness = parsed.weakness
+                    lecture.status = Lecture.Status.SUCCESS
+                }
+                lecture.transcribed = generatedText
+            } else {
+                lecture.status = Lecture.Status.STT_EMPTY
             }
-            lecture.transcribed = generatedText
         } catch (e: Exception) {
             log.error("Error during updating lecture", e)
             lecture.status = Lecture.Status.FAILURE
