@@ -104,7 +104,6 @@ class LectureService(
 
             if (script.isEmpty()) {
                 lecture.status = Lecture.Status.STT_EMPTY
-                lectureRepository.save(lecture)
                 return
             }
 
