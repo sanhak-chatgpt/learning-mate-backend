@@ -102,6 +102,12 @@ class LectureService(
             log.info("Requesting to transcribe - $request")
             val script = whisperService.transcribeAudio(request)
 
+            if (script.isEmpty()) {
+                lecture.status = Lecture.Status.STT_EMPTY
+                lectureRepository.save(lecture)
+                return
+            }
+
             val prompt = """
             아래의 내용을 0~100사이의 점수에 대해 측정하고, 이 내용의 내용에서만 좋았던 점과 개선할 점을 여러개 분석해줘. 아래의 형식으로 데이터를 JSON 으로 만들어줘. 설명하지마. 마크다운으로 주지 마. 오로지 JSON 형태로만 줘. 이상한 내용이거나 짧거나 잘못된 지식이면 0점을 설정해줘. 
             {"score":"/* 0~100사이의 강의에 대한 점수에 대해 매우 야박하고 까다롭게 측정 */","strength":"/* 200자 내외의 좋았던 점 설명 */","weakness":"/* 200자 내외의고쳐야 할 점 설명*/"}
