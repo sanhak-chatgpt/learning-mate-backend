@@ -2,6 +2,7 @@ package kr.ac.kau.learningmate.controller
 
 import kr.ac.kau.learningmate.controller.dto.LectureDto
 import kr.ac.kau.learningmate.service.LectureService
+import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/lecture")
 class LectureController(private val lectureService: LectureService) {
 
+    private val log = LoggerFactory.getLogger(javaClass)
+
     @PostMapping("/")
     fun createLecture(@RequestBody request: LectureDto.Request): LectureDto.Response {
         val userId = 1L
         val lecture = lectureService.createLecture(request, userId)
+        log.info("Call updateLectureAsync from createLecture controller - id = ${lecture.id}")
         lectureService.updateLectureAsync(lecture)
         return lectureService.getLecture(lecture.id, userId)
     }
