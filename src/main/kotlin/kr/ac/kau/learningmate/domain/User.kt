@@ -16,4 +16,7 @@ class User(
     @Column(nullable = false, length = 255)
     var name: String,
 
+    @Column(nullable = false, length = 255)
+    var auth_token: String
+
 ) : AbstractAuditEntity()
