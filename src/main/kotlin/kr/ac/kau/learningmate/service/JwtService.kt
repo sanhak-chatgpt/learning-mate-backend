@@ -15,7 +15,7 @@ class JwtService(
 ) {
     fun generateJwt(user: User): String {
         val now = Date()
-        val expiration = Date(now.time + 31536000000) // 유효 기간 1년 (365 * 24 * 60 * 60 * 1000)
+        // 유효기간은 존재하지 않는다.
 
         val claims = Jwts.claims().apply {
             subject = user.id.toString()
@@ -26,7 +26,6 @@ class JwtService(
             .setClaims(claims)
             .setIssuer(jwtIssuer)
             .setIssuedAt(now)
-            .setExpiration(expiration)
             .signWith(SignatureAlgorithm.HS256, jwtSecret)
             .compact()
     }

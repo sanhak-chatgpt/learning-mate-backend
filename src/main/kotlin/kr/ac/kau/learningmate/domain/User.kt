@@ -20,5 +20,5 @@ class User(
     var authToken: String
 
 ) : AbstractAuditEntity() {
-    constructor(name: String, auth_token: String) : this(0L, name, auth_token)
+    constructor(name: String, authToken: String) : this(0L, name, authToken)
 }

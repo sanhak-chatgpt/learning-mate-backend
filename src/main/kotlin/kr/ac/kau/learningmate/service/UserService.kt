@@ -28,10 +28,10 @@ class UserService(
 
         val user = User(
             name = name,
-            auth_token = jwt
+            authToken = jwt
         )
 
         val savedUser = userRepository.save(user)
-        return savedUser.auth_token
+        return savedUser.authToken
     }
 }
