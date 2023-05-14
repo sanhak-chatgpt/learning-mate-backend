@@ -27,7 +27,7 @@ class UserController(
                 )
             }
     }
-    @PostMapping("/issue/token")
+    @PostMapping("/token/issue")
     fun issueToken(@RequestParam name: String): String {
         return userService.createUserByName(name)
     }
