@@ -40,7 +40,7 @@ class JwtAuthenticationFilter(
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT")
             return
         }
-        if (request.requestURI == "/users/issue/token") {
+        if (request.requestURI == "api/v1/users/issue/token") {
             val jwt = Jwts.builder()
                 .setIssuer(jwtIssuer)
                 .setSubject("randomUser")

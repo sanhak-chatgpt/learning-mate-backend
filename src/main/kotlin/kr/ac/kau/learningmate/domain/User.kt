@@ -19,4 +19,6 @@ class User(
     @Column(nullable = false)
     var auth_token: String
 
-) : AbstractAuditEntity()
+) : AbstractAuditEntity() {
+    constructor(name: String, auth_token: String) : this(0L, name, auth_token)
+}
