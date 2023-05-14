@@ -21,27 +21,26 @@ class JwtAuthenticationFilter(
 
 ) : OncePerRequestFilter() {
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            val token = authHeader.replace("Bearer ", "")
-            try {
-                val claims = Jwts.parser()
-                    .setSigningKey(jwtSecret)
-                    .requireIssuer(jwtIssuer)
-                    .parseClaimsJws(token)
-                    .body
-                val authentication = UsernamePasswordAuthenticationToken(
-                    claims.subject,
-                    null,
-                    emptyList()
-                )
-                authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
-                SecurityContextHolder.getContext().authentication = authentication
-            } catch (e: Exception) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT")
-                return
-            }
-        } else if (request.requestURI == "/") {
+        val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)?.removePrefix("Bearer ")
+        val token = authHeader?.replace("Bearer ", "")
+        try {
+            val claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .requireIssuer(jwtIssuer)
+                .parseClaimsJws(token)
+                .body
+            val authentication = UsernamePasswordAuthenticationToken(
+                claims.subject,
+                null,
+                emptyList()
+            )
+            authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
+            SecurityContextHolder.getContext().authentication = authentication
+        } catch (e: Exception) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT")
+            return
+        }
+        if (request.requestURI == "/users/issue/token") {
             val jwt = Jwts.builder()
                 .setIssuer(jwtIssuer)
                 .setSubject("randomUser")
