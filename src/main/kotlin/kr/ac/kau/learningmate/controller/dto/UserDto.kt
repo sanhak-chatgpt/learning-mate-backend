@@ -4,5 +4,6 @@ sealed class UserDto {
 
     data class Me(
         val name: String,
+        val authToken: String,
     )
 }

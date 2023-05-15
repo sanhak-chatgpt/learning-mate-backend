@@ -19,7 +19,7 @@ class SecurityConfiguration(
     override fun configure(http: HttpSecurity) {
         http
             .authorizeRequests()
-            .antMatchers("/api/v1/major/**", "/api/v1/subject/**", "/api/v1/topic/**",).permitAll()
+            .antMatchers("/api/v1/major/**", "/api/v1/subject/**", "/api/v1/topic/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/api/v1/users/token/issue").permitAll()
             .anyRequest().authenticated()
             .and()
             .csrf().disable()

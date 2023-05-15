@@ -6,6 +6,8 @@ import io.jsonwebtoken.SignatureAlgorithm
 import kr.ac.kau.learningmate.domain.User
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import java.util.Date
 
 @Service
@@ -36,5 +38,31 @@ class JwtService(
             .requireIssuer(jwtIssuer)
             .parseClaimsJws(jwt)
             .body
+    }
+
+    /*
+    Header에서 X-ACCESS-TOKEN 으로 JWT 추출
+    @return String
+    */
+    fun getJwt(): String {
+        val request = (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).request
+        return request.getHeader("Authorization")
+    }
+
+    /*
+    JWT에서 userId 추출
+    */
+    fun getMemberId(): Long {
+        val jwt = getJwt()
+        if (jwt.isNullOrEmpty()) {
+            throw IllegalArgumentException("Empty JWT")
+        }
+
+        try {
+            val claims = verifyJwt(jwt)
+            return claims.subject.toLong()
+        } catch (ex: Exception) {
+            throw IllegalArgumentException("Invalid JWT")
+        }
     }
 }

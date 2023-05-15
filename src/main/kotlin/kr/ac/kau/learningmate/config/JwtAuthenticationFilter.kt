@@ -1,7 +1,6 @@
 package kr.ac.kau.learningmate.config
 
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -38,16 +37,6 @@ class JwtAuthenticationFilter(
             SecurityContextHolder.getContext().authentication = authentication
         } catch (e: Exception) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT")
-            return
-        }
-        if (request.requestURI == "api/v1/users/issue/token") {
-            val jwt = Jwts.builder()
-                .setIssuer(jwtIssuer)
-                .setSubject("randomUser")
-                .signWith(SignatureAlgorithm.HS256, jwtSecret)
-                .compact()
-            response.addHeader(HttpHeaders.AUTHORIZATION, "Bearer $jwt")
-            response.sendRedirect("/")
             return
         }
         filterChain.doFilter(request, response)
