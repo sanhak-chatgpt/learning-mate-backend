@@ -13,6 +13,6 @@ class UserController(
 
     @PostMapping("/token/issue")
     fun issueToken(): UserDto.Me {
-        return userService.createUserByName()
+        return userService.createUser()
     }
 }
