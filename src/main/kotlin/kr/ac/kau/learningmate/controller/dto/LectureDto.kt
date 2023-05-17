@@ -27,4 +27,10 @@ sealed class LectureDto {
     data class RateHelpfulness(
         val helpfulnessRating: Int
     )
+
+    data class UserScore(
+        var id: Long? = null,
+        var username: String,
+        var score: Int
+    )
 }
