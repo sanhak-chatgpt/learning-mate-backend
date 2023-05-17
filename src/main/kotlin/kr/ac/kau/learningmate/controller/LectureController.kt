@@ -40,4 +40,8 @@ class LectureController(private val lectureService: LectureService) {
     ) {
         lectureService.rateHelpfulness(id, userId = 1L, helpfulness)
     }
+    @GetMapping("/ranking")
+    fun getRanking(): List<LectureDto.UserScore> {
+        return lectureService.getRanking()
+    }
 }
