@@ -1,5 +1,7 @@
 package kr.ac.kau.learningmate.controller
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import kr.ac.kau.learningmate.controller.dto.LectureDto
 import kr.ac.kau.learningmate.service.JwtService
 import kr.ac.kau.learningmate.service.LectureService
@@ -21,6 +23,7 @@ class LectureController(
     private val log = LoggerFactory.getLogger(javaClass)
 
     @PostMapping("")
+    @Operation(summary = "Lecture 생성 api", security = [SecurityRequirement(name = "bearer-key")])
     fun createLecture(@RequestBody request: LectureDto.Request): LectureDto.Response {
         val userId = jwtService.getUserId()
         val lecture = lectureService.createLecture(request, userId)
@@ -29,6 +32,7 @@ class LectureController(
         return lectureService.getLecture(lecture.id, userId)
     }
 
+    @Operation(summary = "lecture 조회 api", security = [SecurityRequirement(name = "bearer-key")])
     @GetMapping("/{id}")
     fun getLecture(
         @PathVariable id: Long,
@@ -37,6 +41,7 @@ class LectureController(
         return lectureService.getLecture(id, userId)
     }
 
+    @Operation(summary = "잘한점 조회 api", security = [SecurityRequirement(name = "bearer-key")])
     @PostMapping("/{id}/rate-helpfulness")
     fun rateHelpfulness(
         @PathVariable id: Long,

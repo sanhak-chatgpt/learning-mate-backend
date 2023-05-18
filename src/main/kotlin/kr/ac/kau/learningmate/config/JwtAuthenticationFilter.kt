@@ -27,7 +27,6 @@ class JwtAuthenticationFilter(
                 val authentication = UsernamePasswordAuthenticationToken(userId, null, null)
                 authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = authentication
-                filterChain.doFilter(request, response)
             } catch (ex: Exception) {
                 logger.error("Failed to authenticate JWT: ${ex.message}")
             }
