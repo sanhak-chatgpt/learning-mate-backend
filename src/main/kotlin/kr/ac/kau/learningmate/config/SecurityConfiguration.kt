@@ -28,7 +28,7 @@ class SecurityConfiguration(
                 "/api/v1/users/lectures/**",
                 "/api/v1/users/name/**",
                 "/api/v1/lecture/**",
-            ).permitAll()
+            ).authenticated()
             .anyRequest().permitAll()
             .and()
             .csrf().disable()
