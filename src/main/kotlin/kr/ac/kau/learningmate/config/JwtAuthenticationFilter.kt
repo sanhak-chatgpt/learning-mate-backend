@@ -19,7 +19,12 @@ class JwtAuthenticationFilter(
 ) : OncePerRequestFilter() {
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val jwt = jwtService.getJwt()
+        val jwt = try {
+            jwtService.getJwt()
+        } catch (e: Exception) {
+            ""
+        }
+
         if (!jwt.isNullOrEmpty()) {
             try {
                 val userId = jwtService.getUserId()
