@@ -16,10 +16,10 @@ class RankingController(
 ) {
 
     @GetMapping
-    fun getRanking(): ResponseEntity<LectureRankingDto.LectureRankingDto> {
+    fun getRanking(): ResponseEntity<LectureRankingDto.Response> {
         val userId = jwtService.getUserId()
         val (ranking, message) = rankingService.calculateRanking(userId)
-        val response = LectureRankingDto.LectureRankingDto(ranking, message)
+        val response = LectureRankingDto.Response(ranking, message)
         return ResponseEntity.ok(response)
     }
 }
