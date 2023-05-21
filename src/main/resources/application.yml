@@ -26,3 +26,12 @@ learning-mate:
 jwt:
   secret: jwt-secret
   issuer: jwt-issuer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      enabled: true
