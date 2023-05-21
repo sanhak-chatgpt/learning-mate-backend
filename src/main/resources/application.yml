@@ -22,3 +22,7 @@ spring:
 learning-mate:
   openai-api-key: example-key
   bucket-name: learning-mate-content-prod
+
+jwt:
+  secret: jwt-secret
+  issuer: jwt-issuer

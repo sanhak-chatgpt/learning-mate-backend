@@ -49,6 +49,6 @@ class Lecture(
 
 ) : AbstractAuditEntity() {
     enum class Status {
-        IN_PROGRESS, SUCCESS, FAILURE
+        IN_PROGRESS, SUCCESS, STT_EMPTY, FAILURE
     }
 }

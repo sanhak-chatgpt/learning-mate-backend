@@ -102,6 +102,11 @@ class LectureService(
             log.info("Requesting to transcribe - $request")
             val script = whisperService.transcribeAudio(request)
 
+            if (script.isEmpty()) {
+                lecture.status = Lecture.Status.STT_EMPTY
+                return
+            }
+
             val prompt = """
             아래의 내용을 0~100 사이의 점수에 대해 평가하고, 이 내용에서 좋았던 점과 개선할 점을 분석해줘. JSON 형식으로 결과를 제공해야 하며, 마크다운이나 다른 형식을 사용하지 마세요. 
                 - 잘못된 정보나 너무 짧은 내용이라면 점수를 0으로 설정하고, '잘못된 정보'나 '너무 짧은 내용'이라는 메시지를 포함시켜야 합니다.
