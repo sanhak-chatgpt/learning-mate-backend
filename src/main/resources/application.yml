@@ -32,3 +32,13 @@ jwt:
 sentry:
   enable-tracing: true
   trace-sample-rate: 1.0
+
+
+management:
+  server:
+    port: 18080
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus

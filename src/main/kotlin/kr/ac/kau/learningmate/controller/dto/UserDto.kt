@@ -6,4 +6,8 @@ sealed class UserDto {
         val name: String,
         val authToken: String,
     )
+
+    data class NickName(
+        val name: String,
+    )
 }

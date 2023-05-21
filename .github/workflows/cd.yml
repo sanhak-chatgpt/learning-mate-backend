@@ -42,4 +42,4 @@ jobs:
               docker rmi ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
             fi
             docker pull ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
-            docker run --env-file=/home/ubuntu/.env -d -p 8080:8080 ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
+            docker run --env-file=/home/ubuntu/.env -d -p 8080:8080 -p 18080:18080 ${{ secrets.USERNAME }}/${{ secrets.DOCKER_IMAGE }}:0.1
