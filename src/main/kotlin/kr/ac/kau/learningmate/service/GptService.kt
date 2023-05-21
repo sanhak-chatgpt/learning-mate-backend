@@ -31,6 +31,7 @@ class GptService(
                     role = "user",
                     content = prompt,
                 )
+
             ),
         )
 
