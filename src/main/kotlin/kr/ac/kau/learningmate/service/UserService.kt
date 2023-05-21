@@ -41,8 +41,8 @@ class UserService(
     }
 
     fun updateUserNickname(userId: Long, nickname: UserDto.NickName) {
-        val user = userRepository.findById(userId)
-            .orElseThrow { EntityNotFoundException("User not found with id: $userId") }
+        val user = userRepository.findByIdOrNull(userId)
+            ?: throw EntityNotFoundException("User not found with id: $userId")
         user.name = nickname.name // Assuming the nickname is accessible via the `nickname` property
         userRepository.save(user)
     }
