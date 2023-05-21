@@ -100,21 +100,16 @@ class LectureService(
             val model = "whisper-1" // Whisper 모델명
             val request = WhisperDto.Request(model, audioBytes)
             log.info("Requesting to transcribe - $request")
-            val script = whisperService.transcribeAudio(request)
+            val script = whisperService.transcribeAudio(request).take(2300)
 
             if (script.isEmpty()) {
                 lecture.status = Lecture.Status.STT_EMPTY
                 return
             }
 
-            val prompt = """
-            아래의 내용을 정보의 정확도와 전달력을 기준으로 0~100사이의 점수에 대해 측정하고, 이 내용에서 좋았던 점과 개선할 점을 여러개 분석해줘. 아래의 형식으로 데이터를 JSON 으로 만들어줘. 설명하지마. 마크다운으로 주지 마. 오로지 JSON 형태로만 줘. 이상한 내용이거나 짧거나 잘못된 지식이면 0점을 설정해줘.  공부와 관련이 없으면 관련 없는 내용이면 공부 관련된 "이야기를 해줘 "라고 출력해줘.  한국어가 아니면 "한국어로 해주세요" 라고 해줘. 내용을 정확하게 검증하여 잘못된 정보가 들어오거나 공부에 대한 내용이 아닐 경우 점수를 0으로 설정하고 strength은 공백으로 두고 weakness는 왜 0점이 되었는지 써줘.
-            {"score":"/* 0~100사이의 강의에 대한 점수 정확도를 기준으로 측정*/","strength":"/* 200자 내외의 내용의 정확도를 좋았던 점*/","weakness":"/* 200자 내외의 정확도를 기준으로 추가해야 할 내용*/"}$script
-            """.trimIndent()
-
             // GPT API 호출하여 script를 기반으로 Lecture 생성하기
-            log.info("Requesting to complete chat - $prompt")
-            val generatedText = gptService.completeChat(prompt)
+            log.info("Requesting to complete chat - $script")
+            val generatedText = gptService.completeChat(script)
             log.info("GPT Response - $generatedText")
             val parsed = objectMapper.readValue<GptDto.LectureResponseDto>(generatedText)
             log.info("Parsed - $parsed")
