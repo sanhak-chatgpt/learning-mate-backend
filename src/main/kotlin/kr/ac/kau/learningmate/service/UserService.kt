@@ -27,6 +27,7 @@ class UserService(
         val jwt = jwtService.generateJwt(lastUserId + 1)
 
         val user = User(
+            id = 0L,
             name = name,
         )
 
