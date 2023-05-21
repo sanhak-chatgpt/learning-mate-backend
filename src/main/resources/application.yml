@@ -18,6 +18,8 @@ spring:
       add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
 
 learning-mate:
   openai-api-key: example-key
@@ -26,6 +28,11 @@ learning-mate:
 jwt:
   secret: jwt-secret
   issuer: jwt-issuer
+
+sentry:
+  enable-tracing: true
+  trace-sample-rate: 1.0
+  exception-resolver-order: -2147483647
 
 management:
   server:

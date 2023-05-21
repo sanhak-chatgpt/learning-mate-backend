@@ -136,4 +136,26 @@ class LectureService(
 
         lectureRepository.save(lecture)
     }
+
+    fun getUserLectures(userId: Long): List<LectureDto.Response> {
+        val lectures = lectureRepository.findByUserId(userId)
+
+        return lectures.map { lecture ->
+            LectureDto.Response(
+                id = lecture.id,
+                majorId = lecture.topic.subject.major.id,
+                majorName = lecture.topic.subject.major.majorName,
+                subjectId = lecture.topic.subject.id,
+                subjectName = lecture.topic.subject.subjectName,
+                topicId = lecture.topic.id,
+                topicName = lecture.topic.topicName,
+                transcribed = lecture.transcribed,
+                score = lecture.score,
+                strength = lecture.strength,
+                weakness = lecture.weakness,
+                status = lecture.status,
+                helpfulnessRating = lecture.helpfulnessRating
+            )
+        }
+    }
 }

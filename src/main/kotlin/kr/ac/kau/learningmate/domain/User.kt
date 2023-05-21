@@ -15,5 +15,4 @@ class User(
 
     @Column(nullable = false, length = 255)
     var name: String,
-
 ) : AbstractAuditEntity()

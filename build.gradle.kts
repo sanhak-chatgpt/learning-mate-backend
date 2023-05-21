@@ -51,6 +51,9 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.4")
     // 기기로그인
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    //
+    implementation("io.sentry:sentry-spring-boot-starter:6.19.0")
+    implementation("io.sentry:sentry-logback:6.19.0")
 }
 
 tasks.withType<KotlinCompile> {
