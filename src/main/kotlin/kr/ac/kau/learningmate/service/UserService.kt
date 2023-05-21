@@ -27,15 +27,14 @@ class UserService(
         val jwt = jwtService.generateJwt(lastUserId + 1)
 
         val user = User(
+            id = 0L,
             name = name,
-            authToken = jwt
         )
 
         val savedUser = userRepository.save(user)
 
         return UserDto.Me(
             name = savedUser.name,
-            authToken = savedUser.authToken,
         )
     }
 }

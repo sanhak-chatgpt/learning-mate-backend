@@ -16,9 +16,4 @@ class User(
     @Column(nullable = false, length = 255)
     var name: String,
 
-    @Column(nullable = false)
-    var authToken: String
-
-) : AbstractAuditEntity() {
-    constructor(name: String, authToken: String) : this(0L, name, authToken)
-}
+) : AbstractAuditEntity()
