@@ -32,7 +32,7 @@ internal class LectureUpdateServiceTest {
     @Test
     fun lectureUpdateServiceTest() {
         // Given
-        val user = User(1, "구영민", "auth_token_example")
+        val user = User(1, "구영민")
         val major = Major(1, "소프트웨어", "컴퓨터와 소프트웨어학에 대해 배우는 과목")
         val subject = Subject(1, major, "컴퓨터 네트워크", "네트워크적인 프레임워크에 대해 배우는 과목")
         val topic = Topic(1, subject, "TCP/IP", "통신에 대해 배우는 내용")
