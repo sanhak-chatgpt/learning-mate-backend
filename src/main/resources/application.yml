@@ -28,10 +28,10 @@ jwt:
   issuer: jwt-issuer
 
 management:
+  server:
+    port: 18080
   endpoints:
     web:
       exposure:
-        include: "*"
-  endpoint:
-    prometheus:
-      enabled: true
+        include:
+          - prometheus
