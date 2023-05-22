@@ -35,7 +35,7 @@ class RankingService(private val lectureRepository: LectureRepository) {
             }
             return Pair(userRanking, message)
         } else {
-            return Pair(null, "최근 30일 간 강의를 진행하지 않았어요. 강의를 하러 진행해볼까요?")
+            return Pair(null, "최근 30일 간 진행한 강의가 없어요. 강의를 하러 진행해볼까요?")
         }
     }
 }
