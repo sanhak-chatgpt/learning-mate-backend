@@ -41,6 +41,8 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.6.15")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.13")
     implementation("com.amazonaws:aws-java-sdk-sts:1.12.13")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -49,6 +51,9 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.4")
     // 기기로그인
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    //
+    implementation("io.sentry:sentry-spring-boot-starter:6.19.0")
+    implementation("io.sentry:sentry-logback:6.19.0")
 }
 
 tasks.withType<KotlinCompile> {

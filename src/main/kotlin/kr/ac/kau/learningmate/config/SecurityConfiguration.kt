@@ -23,8 +23,13 @@ class SecurityConfiguration(
         http
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
-            .antMatchers("/api/v1/major/**", "/api/v1/subject/**", "/api/v1/topic/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/api/v1/users/token/issue").permitAll()
-            .anyRequest().authenticated()
+            .antMatchers(
+                "/api/v1/ranking/**",
+                "/api/v1/users/lectures/**",
+                "/api/v1/users/name/**",
+                "/api/v1/lecture/**",
+            ).authenticated()
+            .anyRequest().permitAll()
             .and()
             .csrf().disable()
             .cors().configurationSource {

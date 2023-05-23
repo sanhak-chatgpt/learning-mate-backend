@@ -6,4 +6,6 @@ import java.time.LocalDateTime
 
 interface LectureRepository : JpaRepository<Lecture, Long> {
     fun findByCreatedAtAfter(date: LocalDateTime): List<Lecture>
+
+    fun findByUserId(userId: Long): List<Lecture>
 }

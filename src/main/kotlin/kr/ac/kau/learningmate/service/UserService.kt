@@ -6,6 +6,7 @@ import kr.ac.kau.learningmate.repository.UserRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import javax.persistence.EntityNotFoundException
 
 @Service
 class UserService(
@@ -27,15 +28,22 @@ class UserService(
         val jwt = jwtService.generateJwt(lastUserId + 1)
 
         val user = User(
+            id = 0L,
             name = name,
-            authToken = jwt
         )
 
         val savedUser = userRepository.save(user)
 
         return UserDto.Me(
             name = savedUser.name,
-            authToken = savedUser.authToken,
+            authToken = jwt,
         )
+    }
+
+    fun updateUserNickname(userId: Long, nickname: UserDto.NickName) {
+        val user = userRepository.findByIdOrNull(userId)
+            ?: throw EntityNotFoundException("User not found with id: $userId")
+        user.name = nickname.name // Assuming the nickname is accessible via the `nickname` property
+        userRepository.save(user)
     }
 }
