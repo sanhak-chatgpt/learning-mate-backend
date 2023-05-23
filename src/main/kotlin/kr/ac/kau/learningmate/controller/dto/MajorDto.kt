@@ -7,4 +7,9 @@ sealed class MajorDto {
         val majorName: String,
         val description: String
     )
+
+    data class AdminRequest(
+        val majorName: String,
+        val description: String
+    )
 }
