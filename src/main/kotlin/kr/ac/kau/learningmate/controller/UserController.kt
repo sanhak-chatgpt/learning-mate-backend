@@ -37,9 +37,9 @@ class UserController(
 
     @PutMapping("/name")
     @Operation(summary = "nickName 변경 api", security = [SecurityRequirement(name = "bearer-key")])
-    fun updateUserNickname(@RequestBody name: UserDto.NickName): ResponseEntity<String> {
+    fun updateUserNickname(@RequestBody name: UserDto.NickName): ResponseEntity<UserDto.NickName> {
         val userId = jwtService.getUserId()
         userService.updateUserNickname(userId, name)
-        return ResponseEntity.ok("User nickname updated successfully")
+        return ResponseEntity.ok(name)
     }
 }
