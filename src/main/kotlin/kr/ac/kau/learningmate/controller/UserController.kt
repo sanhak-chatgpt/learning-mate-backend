@@ -35,6 +35,16 @@ class UserController(
         return ResponseEntity.ok(lectures)
     }
 
+    @GetMapping("/name")
+    @Operation(summary = "User 정보 조회 api", security = [SecurityRequirement(name = "bearer-key")])
+    fun getuserName(): UserDto.NickName {
+        val userId = jwtService.getUserId()
+        val user = userService.findById(userId)
+        return UserDto.NickName(
+            user.name,
+        )
+    }
+
     @PutMapping("/name")
     @Operation(summary = "nickName 변경 api", security = [SecurityRequirement(name = "bearer-key")])
     fun updateUserNickname(@RequestBody name: UserDto.NickName): ResponseEntity<UserDto.NickName> {
