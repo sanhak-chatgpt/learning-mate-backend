@@ -27,8 +27,9 @@ class WhisperService(
 
     fun transcribeAudio(request: WhisperDto.Request): String {
         val multipartBodyBuilder = MultipartBodyBuilder()
-        multipartBodyBuilder.part("file", request.file).filename("file.m4a")
+        multipartBodyBuilder.part("file", request.file).filename("file.wav")
         multipartBodyBuilder.part("model", request.model)
+        multipartBodyBuilder.part("language", "ko")
         val body = BodyInserters.fromMultipartData(multipartBodyBuilder.build())
 
         try {
