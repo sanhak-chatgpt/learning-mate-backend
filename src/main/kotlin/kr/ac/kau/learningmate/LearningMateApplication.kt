@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableAsync
 class LearningMateApplication
 
 fun main(args: Array<String>) {
-    Sentry.init()
+    Sentry.init("")
 
     runApplication<LearningMateApplication>(*args)
 }
