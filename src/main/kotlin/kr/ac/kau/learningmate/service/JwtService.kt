@@ -12,14 +12,12 @@ import java.util.Date
 class JwtService(
     @Value("\${jwt.secret}") private val jwtSecret: String,
 ) {
-    fun generateJwt(userId: Long, expirationHours: Long = 24): String {
+    fun generateJwt(userId: Long): String {
         val now = Date()
-        val expiration = Date(now.time + expirationHours * 3600 * 1000)
 
         return Jwts.builder()
             .claim("userId", userId)
             .setIssuedAt(now)
-            .setExpiration(expiration)
             .signWith(SignatureAlgorithm.HS256, jwtSecret)
             .compact()
     }
