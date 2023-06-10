@@ -24,7 +24,7 @@ class GptService(
 
     fun completeChat(prompt: String): String {
         val input = GptDto.Request(
-            model = "gpt-4",
+            model = "gpt-3.5-turbo",
             temperature = 1.15,
             messages = listOf(
                 GptDto.Request.Message(
