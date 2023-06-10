@@ -88,7 +88,7 @@ class LectureService(
 
         try {
             // S3 버킷에 저장된 녹음 파일 키
-            val audioUrl = "https://learning-mate-content-prod.s3.ap-northeast-2.amazonaws.com/deeplearning.m4a" // lecture.audioUrl
+            val audioUrl = "https://learning-mate-content-prod.s3.ap-northeast-2.amazonaws.com/deeplearning.wav" // lecture.audioUrl
             val key = URI(audioUrl).path.substring(1)
 
             // S3에서 녹음 파일 내려받기
