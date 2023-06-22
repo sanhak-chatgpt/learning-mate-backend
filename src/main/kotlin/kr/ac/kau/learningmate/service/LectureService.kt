@@ -158,4 +158,8 @@ class LectureService(
             )
         }
     }
+
+    fun getRecentLectures(): List<Lecture> {
+        return lectureRepository.findRecentLectures()
+    }
 }

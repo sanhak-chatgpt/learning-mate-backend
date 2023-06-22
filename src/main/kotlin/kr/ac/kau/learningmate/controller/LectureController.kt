@@ -3,9 +3,11 @@ package kr.ac.kau.learningmate.controller
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import kr.ac.kau.learningmate.controller.dto.LectureDto
+import kr.ac.kau.learningmate.domain.Lecture
 import kr.ac.kau.learningmate.service.JwtService
 import kr.ac.kau.learningmate.service.LectureService
 import org.slf4j.LoggerFactory
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -49,5 +51,12 @@ class LectureController(
     ) {
         val userId = jwtService.getUserId()
         lectureService.rateHelpfulness(id, userId, helpfulness)
+    }
+
+    @Operation(summary = "최근 Lecture 조회 api", security = [SecurityRequirement(name = "bearer-key")])
+    @GetMapping("/recent")
+    fun getRecentLectures(): ResponseEntity<List<Lecture>> {
+        val recentLectures = lectureService.getRecentLectures()
+        return ResponseEntity.ok(recentLectures)
     }
 }
